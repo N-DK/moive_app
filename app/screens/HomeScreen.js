@@ -9,11 +9,30 @@ import {
   Bars3CenterLeftIcon,
   MagnifyingGlassIcon,
 } from "react-native-heroicons/outline";
-import UpcomingMovie from "../components/UpcomingMovie";
-import TopRatedMovie from "../components/TopRatedMovie";
 import PopularMovie from "../components/PopularMovie";
+import { useEffect, useState } from "react";
+import { fetchTopRatedMovie, fetchUpcomingMovie } from "../api";
+import ListMovie from "../components/ListMovie";
 
 function HomeScreen() {
+  const [upcomingMovie, setUpcomingMovie] = useState([]);
+  const [topRated, setTopRated] = useState([]);
+
+  useEffect(() => {
+    getUpcomingMovie();
+    getTopRated();
+  }, []);
+
+  const getUpcomingMovie = async () => {
+    const data = await fetchUpcomingMovie();
+    setUpcomingMovie(data.results);
+  };
+
+  const getTopRated = async () => {
+    const data = await fetchTopRatedMovie();
+    setTopRated(data.results);
+  };
+
   return (
     <View className="pt-12 flex-1 bg-neutral-800">
       <SafeAreaView className="pr-3 pl-3">
@@ -33,9 +52,11 @@ function HomeScreen() {
           {/* Trending */}
           <PopularMovie />
           {/* Upcoming */}
-          <UpcomingMovie />
+          <ListMovie title="Upcoming" data={upcomingMovie} />
           {/* Top rated */}
-          <TopRatedMovie />
+          <View className="pb-16">
+            <ListMovie title="Top Rated" data={topRated} />
+          </View>
         </ScrollView>
       </SafeAreaView>
     </View>

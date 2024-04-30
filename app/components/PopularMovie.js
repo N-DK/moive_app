@@ -5,6 +5,7 @@ import { ITEM_WIDTH, WIDTH } from "../constants";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import { fetchTrendingMovie } from "../api/moviedb";
 
 function PopularMovie() {
   const [data, setData] = useState([]);
@@ -14,15 +15,13 @@ function PopularMovie() {
   };
 
   useEffect(() => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=e9e9d8da18ae29fc430845952232787c&language=en-US&page=1"
-      )
-      .then((res) => {
-        setData(res.data.results);
-      })
-      .catch((error) => console.log(error));
+    getTrendingMovies();
   }, []);
+
+  const getTrendingMovies = async () => {
+    const data = await fetchTrendingMovie();
+    setData(data.results);
+  };
 
   return (
     <View className="pb-6">

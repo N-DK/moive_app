@@ -1,4 +1,10 @@
-import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { HEIGH, ITEM_WIDTH, URL_IMAGE } from "../constants";
 
 function MovieCard({ data, onPress }) {
@@ -6,7 +12,7 @@ function MovieCard({ data, onPress }) {
     <TouchableWithoutFeedback className="" onPress={onPress}>
       <Image
         className="rounded-3xl"
-        src={`${URL_IMAGE + data.poster_path}`}
+        src={`${URL_IMAGE + data?.poster_path}`}
         style={[{ width: ITEM_WIDTH, height: HEIGH * 0.4, objectFit: "cover" }]}
       />
     </TouchableWithoutFeedback>
