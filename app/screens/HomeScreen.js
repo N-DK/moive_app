@@ -13,8 +13,10 @@ import PopularMovie from "../components/PopularMovie";
 import { useEffect, useState } from "react";
 import { fetchTopRatedMovie, fetchUpcomingMovie } from "../api";
 import ListMovie from "../components/ListMovie";
+import { useNavigation } from "@react-navigation/native";
 
 function HomeScreen() {
+  const navigation = useNavigation();
   const [upcomingMovie, setUpcomingMovie] = useState([]);
   const [topRated, setTopRated] = useState([]);
 
@@ -41,7 +43,7 @@ function HomeScreen() {
           <Text className="text-center text-white text-2xl font-bold">
             <Text className="text-yellow-400">M</Text>ovies
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Search")}>
             <MagnifyingGlassIcon color="white" size={32} />
           </TouchableOpacity>
         </View>

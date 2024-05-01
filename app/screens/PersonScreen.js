@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { ChevronLeftIcon, HeartIcon } from "react-native-heroicons/outline";
 import { fetchPerson } from "../api";
-import { URL_IMAGE } from "../constants";
+import { HEIGH, URL_IMAGE } from "../constants";
 import ListMovie from "../components/ListMovie";
 
 function PersonScreen() {
@@ -40,14 +40,14 @@ function PersonScreen() {
             </TouchableWithoutFeedback>
           </View>
           <View className="flex items-center justify-center mt-5">
-            <View
-              style={{ width: 250, height: 250 }}
-              className="shadow-lg shadow-cyan-500/50"
-            >
+            <View className="w-72 h-72 rounded-full overflow-hidden shadow-2xl shadow-gray-200">
               <Image
-                className="rounded-full"
                 src={`${URL_IMAGE + data?.profile_path}`}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                style={{
+                  width: "100%",
+                  height: HEIGH * 0.45,
+                  objectFit: "cover",
+                }}
               />
             </View>
             <Text className="text-2xl text-white font-semibold mt-3">
@@ -57,7 +57,7 @@ function PersonScreen() {
               {data?.place_of_birth}
             </Text>
           </View>
-          <View className="bg-neutral-600 rounded-full p-4 flex flex-row justify-around mt-6">
+          <View className="bg-neutral-600 rounded-full p-4 container flex justify-around flex-row mt-6">
             <View className="">
               <Text className="text-white text-center font-medium">Gender</Text>
               <Text className="text-center text-neutral-400">

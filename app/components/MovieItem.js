@@ -2,19 +2,22 @@ import { Image, Text, TouchableWithoutFeedback } from "react-native";
 import { View } from "react-native";
 import { HEIGH, URL_IMAGE, WIDTH } from "../constants";
 
-function MovieItem({ data, onPress }) {
+function MovieItem({ data, onPress, percentWidth = 0.35 }) {
   return (
     <View
       style={{ width: WIDTH * 0.35 }}
       className="flex flex-col items-center ml-5"
     >
       <TouchableWithoutFeedback onPress={onPress}>
-        <View>
+        <View className="rounded-3xl overflow-hidden">
           <Image
-            className="rounded-3xl"
             src={`${URL_IMAGE + data?.poster_path}`}
             style={[
-              { width: WIDTH * 0.35, height: HEIGH * 0.25, objectFit: "cover" },
+              {
+                width: WIDTH * percentWidth,
+                height: HEIGH * 0.25,
+                objectFit: "cover",
+              },
             ]}
           />
         </View>

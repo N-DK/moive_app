@@ -21,7 +21,6 @@ import {
 } from "react-native-heroicons/solid";
 import { HEIGH, URL_IMAGE, WIDTH } from "../constants";
 import { LinearGradient } from "expo-linear-gradient";
-import axios from "axios";
 import Cast from "../components/Cast";
 import { fetchCast, fetchMovie, fetchSimilarMovie } from "../api";
 import ListMovie from "../components/ListMovie";
@@ -36,6 +35,29 @@ function MovieScreen() {
 
   const handleOnPress = (item) => {
     navigation.navigate("Person", item);
+  };
+
+  const formatDate = (inputDate) => {
+    const date = new Date(inputDate);
+    const monthIndex = date.getMonth();
+    const monthName = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ][monthIndex];
+    const day = date.getDate();
+    const year = date.getFullYear();
+    const formattedDate = `${monthName} ${day}, ${year}`;
+    return formattedDate;
   };
 
   const getCast = async (item) => {
@@ -83,7 +105,7 @@ function MovieScreen() {
               <View>
                 <Image
                   className="z-0"
-                  src={`${URL_IMAGE + item.poster_path}`}
+                  src={`${URL_IMAGE + item?.poster_path}`}
                   style={[
                     { width: "100%", height: HEIGH * 0.66, objectFit: "cover" },
                   ]}
@@ -116,18 +138,20 @@ function MovieScreen() {
                     <View className="flex flex-row items-center">
                       <ClockIcon size={20} color="white" />
                       <Text className="text-white ml-1">
-                        {data.runtime} minutes
+                        {data?.runtime} minutes
                       </Text>
                     </View>
                     <View className="flex flex-row items-center ml-4">
                       <StarIcon size={20} color="white" />
                       <Text className="text-white ml-1">
-                        {data.vote_average.toFixed(1)} (IMDb)
+                        {data?.vote_average?.toFixed(1)} (IMDb)
                       </Text>
                     </View>
                     <View className="flex flex-row items-center ml-4">
                       <CalendarIcon size={20} color="white" />
-                      <Text className="text-white ml-1">December 9, 2017</Text>
+                      <Text className="text-white ml-1">
+                        {formatDate(data?.release_date)}
+                      </Text>
                     </View>
                   </View>
                 </View>
@@ -137,7 +161,7 @@ function MovieScreen() {
                 className="space-y-3 pl-3 pr-3"
               >
                 <Text className="text-justify text-white leading-5 mb-2">
-                  {data.overview}
+                  {data?.overview}
                 </Text>
                 <View className="mb-5">
                   <Text className="text-white text-base font-medium mb-3">
@@ -151,7 +175,7 @@ function MovieScreen() {
                     <View className="flex flex-row">
                       {casts?.map((cast, index) => (
                         <Cast
-                          key={cast.id + index}
+                          key={index}
                           data={cast}
                           onPress={() => handleOnPress(cast)}
                         />
