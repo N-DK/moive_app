@@ -6,4 +6,5 @@ export {
   fetchMovie,
   fetchSimilarMovie,
   fetchPerson,
+  fetchSearch
 } from "./moviedb";

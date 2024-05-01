@@ -43,3 +43,8 @@ export const fetchPerson = (id) => {
     `${apiBaseUrl}/person/${id}?api_key=${apiKey}&append_to_response=combined_credits`
   );
 };
+export const fetchSearch = (text) => {
+  return apiCall(
+    `${apiBaseUrl}/search/movie?api_key=${apiKey}&page=1&query=${text}`
+  );
+};

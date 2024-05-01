@@ -40,7 +40,7 @@ function PersonScreen() {
             </TouchableWithoutFeedback>
           </View>
           <View className="flex items-center justify-center mt-5">
-            <View className="w-72 h-72 rounded-full overflow-hidden shadow-2xl shadow-gray-200">
+            <View style={{elevation: 60}} className="w-72 h-72 rounded-full overflow-hidden shadow-gray-200 border-2 border-neutral-600">
               <Image
                 src={`${URL_IMAGE + data?.profile_path}`}
                 style={{
